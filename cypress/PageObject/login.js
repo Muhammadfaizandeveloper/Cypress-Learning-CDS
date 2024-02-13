@@ -56,6 +56,10 @@ class login {
     cy.get(this.password).type(data.invalid_Password);
   }
 
+  clickForgotPasswordCTA() {
+    cy.get(this.forgotPassword).click();
+  }
+
   clickLogin() {
     cy.get(this.loginBtn).click();
   }

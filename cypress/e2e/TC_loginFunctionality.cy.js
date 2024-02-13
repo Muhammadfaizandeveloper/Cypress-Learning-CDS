@@ -1,5 +1,6 @@
 import objLogin from "../PageObject/login";
 import objDashboard from "../PageObject/dashboard";
+import objPassword from "../PageObject/forgotPassoword";
 
 describe("Login Functionality", () => {
   beforeEach(() => {
@@ -55,5 +56,10 @@ describe("Login Functionality", () => {
     objLogin.enterUnregisteredPassword();
     objLogin.clickLogin();
     objLogin.verifyWrongPasswordError();
+  });
+
+  it("Verify click forgot email", () => {
+    objLogin.clickForgotPasswordCTA();
+    objPassword.verifyForgotPasswordScreen();
   });
 });
