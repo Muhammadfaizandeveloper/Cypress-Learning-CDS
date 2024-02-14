@@ -32,73 +32,21 @@ class login {
     cy.get(this.loginBtn).contains("Login");
   }
 
-  enterRegisteredEmail() {
-    cy.get(this.email).type(data.registered_Email);
+  enterEmail(email) {
+    cy.get(this.email).type(email);
   }
 
-  enterUnnregisteredEmail() {
-    cy.get(this.email).type(data.unregistered_Email);
-  }
-
-  enterInvalidEmail() {
-    cy.get(this.email).type(data.invalid_Email);
-  }
-
-  enterRegisteredPassword() {
-    cy.get(this.password).type(data.registered_Password);
-  }
-
-  enterUnregisteredPassword() {
-    cy.get(this.password).type(data.unregistered_Password);
-  }
-
-  enterInvalidPassword() {
-    cy.get(this.password).type(data.invalid_Password);
+  enterPassword(password) {
+    cy.get(this.password).type(password);
   }
 
   clickLogin() {
     cy.get(this.loginBtn).click();
   }
 
-  verifyUnregisteredError() {
-    cy.get(this.unregisteredLoginError).should(
-      "have.text",
-      "Invalid or Inactive User"
-    );
-  }
-
-  verifyRequireEmailError() {
-    cy.get(this.emailRequireError).should(
-      "have.text",
-      "The Username field is required."
-    );
-  }
-
-  verifyRequirePassowordError() {
-    cy.get(this.passwordRequireError).should(
-      "have.text",
-      "The Password field is required."
-    );
-  }
-
-  verifyInvalidEmailError() {
-    cy.get(this.invalidEmailError).should(
-      "have.text",
-      "Please enter a valid email address."
-    );
-  }
-
-  verifyInvalidPasswordError() {
-    cy.get(this.invalidPasswordError).should(
-      "have.text",
-      "The field Password must be a string or array type with a minimum length of '8'."
-    );
-  }
-
-  verifyWrongPasswordError() {
-    cy.get(this.wrongLoginError).should(
-      "have.text",
-      "Username or Password is incorrect"
+  verifyErrorMsgs(locator, errorMsg) {
+    cy.get(locator).should(
+      "have.text",errorMsg
     );
   }
 }

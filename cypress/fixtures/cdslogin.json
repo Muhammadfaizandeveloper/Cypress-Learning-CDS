@@ -1,4 +1,6 @@
 {
+  "email": "faran.sajid@tkxel.com",
+  "password": "P@ssw0rd123",
   "registered_Email": "faran.sajid@tkxel.com",
   "unregistered_Email": "faran@tkxel.com",
   "invalid_Email": "faran",
@@ -6,5 +8,11 @@
   "unregistered_Password": "P@ssw0rd",
   "invalid_Password": "11",
   "firstname": "cypress",
-  "lastname": "io"
+  "lastname": "io",
+  "unregistered_User_Error": "Invalid or Inactive User",
+  "email_Required_Error": "The Username field is required.",
+  "password_Required_Error": "The Password field is required.",
+  "invalid_Email_Error": "Please enter a valid email address.",
+  "invalid_Password_Error": "The field Password must be a string or array type with a minimum length of '8'.",
+  "wrong_Login_Error": "Username or Password is incorrect"
 }

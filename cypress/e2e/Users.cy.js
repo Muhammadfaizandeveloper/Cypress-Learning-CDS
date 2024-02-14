@@ -1,4 +1,3 @@
-
 import Users from '../PageObject/Users.cy';
 import LoginPage from '../PageObject/cdslogin.cy';
 import cdslogin from '../fixtures/cdslogin.json';
@@ -6,15 +5,11 @@ import { generateRandomEmail } from '../support/randomemail';
 import { calculateTotalPages } from '../support/pagination';
 describe('Users Test', () => {
   beforeEach(() => {
-    // Assuming your application is served at http://localhost:3000
         LoginPage.visitSite();
         LoginPage.typeUsername(cdslogin.email);
         LoginPage.typePassword(cdslogin.password);
         LoginPage.clickLoginButton();
   });
-
-  // Test faizan
-
   it.only('Add Users', () => {
 
      Users.clickuserNavBar();
@@ -26,7 +21,6 @@ describe('Users Test', () => {
     //       Users.addUser();
     //      }
     //    }
-
     // Users.verifyUserCreated(randomEmail);
     // Users.deleteUser(randomEmail);
     // Users.calculateRowsandCols();
@@ -40,8 +34,8 @@ describe('Users Test', () => {
            Users.deleteAllUnactiveUsers();
          }
        }
-
-
+      
+       //2
       // calculateTotalPages().then((totalPages) => {
       //   for (let i = 1; i < totalPages; i++)
       //   {
