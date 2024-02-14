@@ -1,23 +1,36 @@
-import objLogin from "../PageObject/login";
+import objLogin from "../fixtures/login.json";
+import methodLogin from "../Methods/Login";
 
 describe("Login UI", () => {
   beforeEach(() => {
-    objLogin.openLoginPage();
+    methodLogin.openApplication(objLogin.baseUrl);
   });
 
   it("Verify Email Field is visible", () => {
-    objLogin.verifyEmailField();
+    methodLogin.visisbilityFromAttribute(
+      objLogin.emailField,
+      "placeholder",
+      "Your Email"
+    );
   });
 
   it("Verify Password Field is visible", () => {
-    objLogin.verifyPasswordField();
+    methodLogin.visisbilityFromAttribute(
+      objLogin.passwordField,
+      "placeholder",
+      "8-10 Characters"
+    );
   });
 
   it("Verify Forgot Password CTA is visible", () => {
-    objLogin.verifyForgotPasswordCTA();
+    methodLogin.visisbilityFromAttribute(
+      objLogin.CTA_forgot,
+      "href",
+      "/Password"
+    );
   });
 
-  it.only("Verify Login button is visible", () => {
-    objLogin.verifyLoginButton();
+  it("Verify Login button is visible", () => {
+    methodLogin.visibilityFrmText(objLogin.lginBtn, "Login");
   });
 });
