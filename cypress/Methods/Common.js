@@ -1,6 +1,6 @@
-class LoginMethod {
-  openApplication(element) {
-    cy.visit(element);
+class Common {
+  openApplication(url) {
+    cy.visit(url);
   }
 
   visisbilityFromAttribute(element, type, text) {
@@ -9,6 +9,10 @@ class LoginMethod {
 
   visibilityFrmText(element, text) {
     cy.get(element).should("have.text", text);
+  }
+
+  verifyUrl(text) {
+    cy.url().should("include", text);
   }
 
   clickElement(element) {
@@ -20,4 +24,4 @@ class LoginMethod {
   }
 }
 
-export default new LoginMethod();
+export default new Common();

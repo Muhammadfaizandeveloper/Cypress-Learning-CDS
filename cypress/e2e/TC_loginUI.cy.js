@@ -1,13 +1,13 @@
 import objLogin from "../fixtures/login.json";
-import methodLogin from "../Methods/Login";
+import method from "../Methods/Common";
 
 describe("Login UI", () => {
   beforeEach(() => {
-    methodLogin.openApplication(objLogin.baseUrl);
+    method.openApplication(objLogin.baseUrl);
   });
 
   it("Verify Email Field is visible", () => {
-    methodLogin.visisbilityFromAttribute(
+    method.visisbilityFromAttribute(
       objLogin.emailField,
       "placeholder",
       "Your Email"
@@ -15,7 +15,7 @@ describe("Login UI", () => {
   });
 
   it("Verify Password Field is visible", () => {
-    methodLogin.visisbilityFromAttribute(
+    method.visisbilityFromAttribute(
       objLogin.passwordField,
       "placeholder",
       "8-10 Characters"
@@ -23,14 +23,10 @@ describe("Login UI", () => {
   });
 
   it("Verify Forgot Password CTA is visible", () => {
-    methodLogin.visisbilityFromAttribute(
-      objLogin.CTA_forgot,
-      "href",
-      "/Password"
-    );
+    method.visisbilityFromAttribute(objLogin.CTA_forgot, "href", "/Password");
   });
 
   it("Verify Login button is visible", () => {
-    methodLogin.visibilityFrmText(objLogin.lginBtn, "Login");
+    method.visibilityFrmText(objLogin.lginBtn, "Login");
   });
 });

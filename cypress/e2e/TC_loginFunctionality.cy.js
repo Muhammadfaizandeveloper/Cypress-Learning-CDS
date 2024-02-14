@@ -1,90 +1,81 @@
 import objLogin from "../fixtures/login.json";
-import methodLogin from "../Methods/Login";
-import objDashboard from "../PageObject/dashboard";
-import objPassword from "../PageObject/forgotPassoword";
+import method from "../Methods/Common";
+import objDashboard from "../fixtures/dashboard.json";
+
+const login = (email, password) => {
+  method.enter(objLogin.emailField, email);
+  method.enter(objLogin.passwordField, password);
+  method.clickElement(objLogin.lginBtn);
+};
+
+const verifyErrorMessage = (element, text) => {
+  method.visibilityFrmText(element, text);
+};
 
 describe("Login Functionality", () => {
   beforeEach(() => {
-    methodLogin.openApplication(objLogin.baseUrl);
+    method.openApplication(objLogin.baseUrl);
   });
 
   it("Verify user can login with registered email", () => {
-    methodLogin.enter(objLogin.emailField, objLogin.registered_Email);
-    methodLogin.enter(objLogin.passwordField, objLogin.registered_Password);
-    methodLogin.clickElement(objLogin.lginBtn);
-    objDashboard.verifydashboardScreen();
+    login(objLogin.registered_Email, objLogin.registered_Password);
+    verifyErrorMessage(objDashboard.header, "Dashboard");
   });
 
   it("Verify login with unregistered email", () => {
-    methodLogin.enter(objLogin.emailField, objLogin.unregistered_Email);
-    methodLogin.enter(objLogin.passwordField, objLogin.unregistered_Password);
-    methodLogin.clickElement(objLogin.lginBtn);
-    methodLogin.visibilityFrmText(
-      objLogin.unregUserError,
-      objLogin.unRegUserErrorText
-    );
+    login(objLogin.unregistered_Email, objLogin.unregistered_Password);
+    verifyErrorMessage(objLogin.unregUserError, objLogin.unRegUserErrorText);
   });
 
-  it("Veify click lgin button without entering email and a password", () => {
-    methodLogin.clickElement(objLogin.lginBtn);
-    methodLogin.visibilityFrmText(
-      objLogin.reqEmailError,
-      objLogin.reqEmailErrorText
-    );
-    methodLogin.visibilityFrmText(
+  it("Veify click login button without entering email and a password", () => {
+    method.clickElement(objLogin.lginBtn);
+    verifyErrorMessage(objLogin.reqEmailError, objLogin.reqEmailErrorText);
+    verifyErrorMessage(
       objLogin.reqPasswordError,
       objLogin.reqPasswordErrorText
     );
   });
 
   it("Verify click login without entering email", () => {
-    methodLogin.enter(objLogin.passwordField, objLogin.registered_Password);
-    methodLogin.clickElement(objLogin.lginBtn);
-    methodLogin.visibilityFrmText(
-      objLogin.reqEmailError,
-      objLogin.reqEmailErrorText
-    );
+    method.enter(objLogin.passwordField, objLogin.registered_Password);
+    method.clickElement(objLogin.lginBtn);
+    verifyErrorMessage(objLogin.reqEmailError, objLogin.reqEmailErrorText);
   });
 
   it("Verify click login without entering password", () => {
-    methodLogin.enter(objLogin.emailField, objLogin.registered_Email);
-    methodLogin.clickElement(objLogin.lginBtn);
-    methodLogin.visibilityFrmText(
+    method.enter(objLogin.emailField, objLogin.registered_Email);
+    method.clickElement(objLogin.lginBtn);
+    verifyErrorMessage(
       objLogin.reqPasswordError,
       objLogin.reqPasswordErrorText
     );
   });
 
   it("Verify enter invalid email", () => {
-    methodLogin.enter(objLogin.emailField, objLogin.invalid_Email);
-    methodLogin.clickElement(objLogin.lginBtn);
-    methodLogin.visibilityFrmText(
+    method.enter(objLogin.emailField, objLogin.invalid_Email);
+    method.clickElement(objLogin.lginBtn);
+    verifyErrorMessage(
       objLogin.invalidEmailError,
       objLogin.invalidEmailErrorText
     );
   });
 
   it("Verify enter invalid password", () => {
-    methodLogin.enter(objLogin.passwordField, objLogin.invalid_Password);
-    methodLogin.clickElement(objLogin.lginBtn);
-    methodLogin.visibilityFrmText(
+    method.enter(objLogin.passwordField, objLogin.invalid_Password);
+    method.clickElement(objLogin.lginBtn);
+    verifyErrorMessage(
       objLogin.invalidPasswordError,
       objLogin.invalidPasswordErrorText
     );
   });
 
   it("Enter wrong password for register email", () => {
-    methodLogin.enter(objLogin.emailField, objLogin.registered_Email);
-    methodLogin.enter(objLogin.passwordField, objLogin.unregistered_Password);
-    methodLogin.clickElement(objLogin.lginBtn);
-    methodLogin.visibilityFrmText(
-      objLogin.wrongLoginError,
-      objLogin.wrongInputErrorText
-    );
+    login(objLogin.registered_Email, objLogin.unregistered_Password);
+    verifyErrorMessage(objLogin.wrongLoginError, objLogin.wrongInputErrorText);
   });
 
   it("Verify click forgot email", () => {
-    methodLogin.clickElement(objLogin.CTA_forgot);
-    objPassword.verifyForgotPasswordScreen();
+    method.clickElement(objLogin.CTA_forgot);
+    method.verifyUrl("/Password");
   });
 });
