@@ -1,4 +1,3 @@
-import data from "../fixtures/cdslogin.json";
 class dashboard {
   header = "div[class='logo-nav'] h5";
 
